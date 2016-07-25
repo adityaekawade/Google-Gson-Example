@@ -1,0 +1,141 @@
+package p1;
+
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GsonJavaExample {
+    public static void main(String[] args) {
+
+        StockDetails stock = new StockDetails();
+        stock.setName("HDFC");
+        stock.setOpenPrice(261.65);
+        stock.setHighPrice(264.00);
+        stock.setLowPrice(251.12);
+        stock.setCurrentPrioe(263.89);
+        List<String> listedIn = new ArrayList<String>();
+        listedIn.add("NSE");
+        listedIn.add("BSE");
+        stock.setListedIn(listedIn);
+        List<String> competitors = new ArrayList<String>();
+        competitors.add("HDFC");
+        competitors.add("LnT");
+        stock.setCompetitors(competitors);
+
+        stock.setNumberOfShare(2500);
+        stock.setStockId(500);
+
+        Gson gson = new Gson();
+
+        String json = gson.toJson(stock);
+        System.out.println(json);
+
+        try {
+            File f = new File("D:\\coursetro\\Files", "Stock.json");
+            //FileWriter fw = new FileWriter(f);
+            //f.createNewFile();
+            FileWriter w = new FileWriter(f);
+            w.write(json);
+            w.close();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+
+
+
+class StockDetails {
+
+    private String name;
+    private double openPrice;
+    private double highPrice;
+    private double lowPrice;
+    private double currentPrioe;
+    private List<String> listedIn;
+    private List<String> competitors;
+
+    private transient int numberOfShare;
+    private static int stockId;
+
+    public static int getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getOpenPrice() {
+        return openPrice;
+    }
+
+    public void setOpenPrice(double openPrice) {
+        this.openPrice = openPrice;
+    }
+
+    public double getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(double highPrice) {
+        this.highPrice = highPrice;
+    }
+
+    public double getLowPrice() {
+        return lowPrice;
+    }
+
+    public void setLowPrice(double lowPrice) {
+        this.lowPrice = lowPrice;
+    }
+
+    public double getCurrentPrioe() {
+        return currentPrioe;
+    }
+
+    public void setCurrentPrioe(double currentPrioe) {
+        this.currentPrioe = currentPrioe;
+    }
+
+    public List<String> getListedIn() {
+        return listedIn;
+    }
+
+    public void setListedIn(List<String> listedIn) {
+        this.listedIn = listedIn;
+    }
+
+    public List<String> getCompetitors() {
+        return competitors;
+    }
+
+    public void setCompetitors(List<String> competitors) {
+        this.competitors = competitors;
+    }
+
+
+    public int getNumberOfShare() {
+        return numberOfShare;
+    }
+
+    public void setNumberOfShare(int numberOfShare) {
+        this.numberOfShare = numberOfShare;
+    }
+}
