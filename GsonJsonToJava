@@ -1,0 +1,39 @@
+package p1;
+
+import com.google.gson.Gson;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
+
+public class GsonJsonToJava {
+    public static void main(String[] args) {
+        Gson gson = new Gson();
+        try {
+            //1
+            BufferedReader br = new BufferedReader(new FileReader("D:/coursetro/Files/Stock.json"));
+            //2
+            StockDetails stock = gson.fromJson(br, StockDetails.class); //convert the json string back to object
+            //3
+            System.out.println("Name : " +  stock.getName() );
+            System.out.println("Open Price : " + stock.getOpenPrice());
+            System.out.println("High Price : " + stock.getHighPrice() );
+            System.out.println("Low Price : " + stock.getLowPrice() );
+            System.out.println("Current Price : " + stock.getCurrentPrioe() );
+            List<String> listedIn = stock.getListedIn();
+            System.out.println("Listed in : ");
+            for (String x : listedIn) {
+                System.out.println(x);
+            }
+            List<String> competitors = stock.getCompetitors();
+            System.out.println("competitors are : ");
+            for (String x : competitors) {
+                System.out.println(x);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
